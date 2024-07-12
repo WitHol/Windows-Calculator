@@ -26,7 +26,7 @@ maxTextLength = 10
 text = ' ' * maxTextLength
 textButton = tk.Button(root, width=300, height=100, text = text, image=image, compound='c', font=textFont, bg="#444444", fg='#ffffff', border = 0,  state="disabled")
 
-def addChar(char):
+def add_char(char):
     global text
 
     if(text[0] != ' '): return None
@@ -53,21 +53,21 @@ def count():
 
     textButton.config(text=text)
 
-def add_1(): addChar('1')
-def add_2(): addChar('2')
-def add_3(): addChar('3')
-def add_4(): addChar('4')
-def add_5(): addChar('5')
-def add_6(): addChar('6')
-def add_7(): addChar('7')
-def add_8(): addChar('8')
-def add_9(): addChar('9')
-def add_0(): addChar('0')
-def add_dot(): addChar('.')
-def add_addition(): addChar('+')
-def add_substraction(): addChar('-')
-def add_multiplication(): addChar('*')
-def add_division(): addChar('/')
+def add_1(): add_char('1')
+def add_2(): add_char('2')
+def add_3(): add_char('3')
+def add_4(): add_char('4')
+def add_5(): add_char('5')
+def add_6(): add_char('6')
+def add_7(): add_char('7')
+def add_8(): add_char('8')
+def add_9(): add_char('9')
+def add_0(): add_char('0')
+def add_dot(): add_char('.')
+def add_addition(): add_char('+')
+def add_substraction(): add_char('-')
+def add_multiplication(): add_char('*')
+def add_division(): add_char('/')
 
 
 # All the buttons
