@@ -6,6 +6,7 @@ root = tk.Tk()
 root.title("Windows calculator")
 root.resizable(0,0)
 root.geometry('400x500')
+root.config(bg="#444444")
 
 # Making it so t hat when the window is closed, the program ends
 def closeWindow():
@@ -13,31 +14,103 @@ def closeWindow():
     exit(code=1)
 root.protocol("WM_DELETE_WINDOW", closeWindow)
 
-font = tkf.Font(family="Arial", size=14)
+# Fonts
+buttonFont = tkf.Font(family="Arial", size=50)
+textFont = tkf.Font(family="Arial", size=37)
+
+# An image, to make the buttons square
+image = tk.PhotoImage(width=6, height=1)
+
+# The button acting as a diplay, because I had too little patience to work with the text widget
+maxTextLength = 10
+text = ' ' * maxTextLength
+textButton = tk.Button(root, width=300, height=100, text = text, image=image, compound='c', font=textFont, bg="#444444", fg='#ffffff', border = 0,  state="disabled")
+
+def addChar(char):
+    global text
+
+    if(text[0] != ' '): return None
+    text = text[1:] + char
+
+    textButton.config(text=text)
+
+def remove_char():
+    global text
+
+    text = ' ' + text[:maxTextLength-1]
+
+    textButton.config(text=text)
+
+def count():
+    global text
+
+    try:
+        text = str(eval(text))
+        text = ' '*(maxTextLength-len(text)) + text
+        text = text[len(text)-maxTextLength : len(text)] # handling irrational numbers
+    except:
+        text = '     ERROR' # division by 0
+
+    textButton.config(text=text)
+
+def add_1(): addChar('1')
+def add_2(): addChar('2')
+def add_3(): addChar('3')
+def add_4(): addChar('4')
+def add_5(): addChar('5')
+def add_6(): addChar('6')
+def add_7(): addChar('7')
+def add_8(): addChar('8')
+def add_9(): addChar('9')
+def add_0(): addChar('0')
+def add_dot(): addChar('.')
+def add_addition(): addChar('+')
+def add_substraction(): addChar('-')
+def add_multiplication(): addChar('*')
+def add_division(): addChar('/')
+
 
 # All the buttons
-buttonc = tk.Button(root, text="c", width=2, height=2, font=font, bg='#333333', fg='#dddddd')
-button1 = tk.Button(root, text="1", width=2, height=2, font=font, bg='#333333', fg='#dddddd')
-button2 = tk.Button(root, text="2", width=2, height=2, font=font, bg='#333333', fg='#dddddd')
-button3 = tk.Button(root, text="3", width=2, height=2, font=font, bg='#333333', fg='#dddddd')
-button4 = tk.Button(root, text="4", width=2, height=2, font=font, bg='#333333', fg='#dddddd')
-button5 = tk.Button(root, text="5", width=2, height=2, font=font, bg='#333333', fg='#dddddd')
-button6 = tk.Button(root, text="6", width=2, height=2, font=font, bg='#333333', fg='#dddddd')
-button7 = tk.Button(root, text="7", width=2, height=2, font=font, bg='#333333', fg='#dddddd')
-button8 = tk.Button(root, text="8", width=2, height=2, font=font, bg='#333333', fg='#dddddd')
-button9 = tk.Button(root, text="9", width=2, height=2, font=font, bg='#333333', fg='#dddddd')
-button0 = tk.Button(root, text="0", width=2, height=2, font=font, bg='#333333', fg='#dddddd')
+button_1 = tk.Button(root, image=image, compound='c', text="1", width=86, height=86, font=buttonFont, bg="#444444", fg='#dddddd', border=5, command=add_1)
+button_2 = tk.Button(root, image=image, compound='c', text="2", width=86, height=86, font=buttonFont, bg="#444444", fg='#dddddd', border=5, command=add_2)
+button_3 = tk.Button(root, image=image, compound='c', text="3", width=86, height=86, font=buttonFont, bg="#444444", fg='#dddddd', border=5, command=add_3)
+button_4 = tk.Button(root, image=image, compound='c', text="4", width=86, height=86, font=buttonFont, bg="#444444", fg='#dddddd', border=5, command=add_4)
+button_5 = tk.Button(root, image=image, compound='c', text="5", width=86, height=86, font=buttonFont, bg="#444444", fg='#dddddd', border=5, command=add_5)
+button_6 = tk.Button(root, image=image, compound='c', text="6", width=86, height=86, font=buttonFont, bg="#444444", fg='#dddddd', border=5, command=add_6)
+button_7 = tk.Button(root, image=image, compound='c', text="7", width=86, height=86, font=buttonFont, bg="#444444", fg='#dddddd', border=5, command=add_7)
+button_8 = tk.Button(root, image=image, compound='c', text="8", width=86, height=86, font=buttonFont, bg="#444444", fg='#dddddd', border=5, command=add_8)
+button_9 = tk.Button(root, image=image, compound='c', text="9", width=86, height=86, font=buttonFont, bg="#444444", fg='#dddddd', border=5, command=add_9)
+button_0 = tk.Button(root, image=image, compound='c', text="0", width=86, height=86, font=buttonFont, bg="#444444", fg='#dddddd', border=5, command=add_0)
+button_dot = tk.Button(root, image=image, compound='c', text=".", width=86, height=86, font=buttonFont, bg="#444444", fg='#dddddd', border=5, command=add_dot)
+button_backspace = tk.Button(root, image=image, compound='c', text="←", width=86, height=86, font=buttonFont, bg="#444444", fg='#dddddd', border=5, command=remove_char)
+button_equal = tk.Button(root, image=image, compound='c', text="=", width=86, height=86, font=buttonFont, bg="#444444", fg='#dddddd', border=5, command=count)
+button_addition = tk.Button(root, image=image, compound='c', text="+", width=86, height=86, font=buttonFont, bg="#444444", fg='#dddddd', border=5, command=add_addition)
+button_substraction = tk.Button(root, image=image, compound='c', text="-", width=86, height=86, font=buttonFont, bg="#444444", fg='#dddddd', border=5, command=add_substraction)
+button_multiplication = tk.Button(root, image=image, compound='c', text="*", width=86, height=86, font=buttonFont, bg="#444444", fg='#dddddd', border=5, command=add_multiplication)
+button_division = tk.Button(root, image=image, compound='c', text="/", width=86, height=86, font=buttonFont, bg="#444444", fg='#dddddd', border=5, command=add_division)
 
-buttonc.grid(column=1, row=1, sticky='NSEW', rowspan=3)
-button1.grid(column=1, row=2, sticky='NSEW')
-button2.grid(column=2, row=2, sticky='NSEW')
-button3.grid(column=3, row=2, sticky='NSEW')
-button4.grid(column=1, row=3, sticky='NSEW')
-button5.grid(column=2, row=3, sticky='NSEW')
-button6.grid(column=3, row=3, sticky='NSEW')
-button7.grid(column=1, row=4, sticky='NSEW')
-button8.grid(column=2, row=4, sticky='NSEW')
-button9.grid(column=3, row=4, sticky='NSEW')
-button0.grid(column=2, row=5, sticky='NSEW')
+textButton.grid(column=1, row=1, columnspan=3)
+button_equal.grid(column=4, row=1)
 
+button_1.grid(column=1, row=2)
+button_2.grid(column=2, row=2)
+button_3.grid(column=3, row=2)
+button_division.grid(column=4, row=2)
+
+button_4.grid(column=1, row=3)
+button_5.grid(column=2, row=3)
+button_6.grid(column=3, row=3)
+button_multiplication.grid(column=4, row = 3)
+
+button_7.grid(column=1, row=4)
+button_8.grid(column=2, row=4)
+button_9.grid(column=3, row=4)
+button_substraction.grid(column=4, row=4)
+
+button_dot.grid(column=1, row=5)
+button_0.grid(column=2, row=5)
+button_backspace.grid(column=3, row=5)
+button_addition.grid(column=4, row=5)
+
+# Loop
 root.mainloop()
