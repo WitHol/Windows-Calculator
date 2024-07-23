@@ -32,7 +32,9 @@ if '%errorlevel%' NEQ '0' (
 
 mkdir "C:\Program Files\Windows Calculator"
 copy calculator.exe "C:\Program Files\Windows Calculator\calculator.exe"
+copy "Windows Calculator uninstaller.bat" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Windows Calculator uninstaller.bat"
 
+:--------------------------------------
 echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
 echo sLinkFile = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Windows Calculator.lnk" >> CreateShortcut.vbs
 echo Set oLink = oWS.CreateShortcut(sLinkFile) >> CreateShortcut.vbs
@@ -40,3 +42,4 @@ echo oLink.TargetPath = "C:\Program Files\Windows Calculator\calculator.exe" >> 
 echo oLink.Save >> CreateShortcut.vbs
 cscript CreateShortcut.vbs
 del CreateShortcut.vbs
+:--------------------------------------
